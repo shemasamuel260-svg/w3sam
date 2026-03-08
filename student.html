@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Learning Pro | Rwanda Schools</title>
+  <!-- Font Awesome 6 (includes brand icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* === Modern Professional Design === */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif; 
+      background: #f4f9f4; 
+      line-height: 1.6;
+    }
+
+    /* Header with gradient */
+    header { 
+      background: linear-gradient(135deg, #0f3b0f, #1b5e20); 
+      color: white; 
+      padding: 1rem 2rem; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      flex-wrap: wrap; 
+      box-shadow: 0 6px 15px rgba(0,40,0,0.25);
+    }
+    header h2 { 
+      font-size: 2rem; 
+      letter-spacing: 1px; 
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    nav a { 
+      color: white; 
+      text-decoration: none; 
+      font-weight: 600; 
+      padding: 0.5rem 1rem; 
+      border-radius: 40px; 
+      transition: all 0.2s; 
+      cursor: pointer;
+      background: rgba(255,255,255,0.1);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+    nav a:hover { background: #43a047; transform: translateY(-2px); }
+
+    /* Section styling */
+    section { display: none; padding: 3rem 2rem; min-height: 70vh; animation: fade 0.4s; }
+    #home { display: block; background: linear-gradient(145deg, #1b5e20, #66bb6a); color: white; text-align: center; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Dashboard cards with glassmorphism */
+    .dashboard { 
+      background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem; 
+      max-width: 800px; 
+      margin: 2rem auto; 
+      border-radius: 32px; 
+      box-shadow: 0 25px 40px -10px rgba(0,60,0,0.3); 
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .dashboard-wide { max-width: 1200px; }
+    .footer-about-text { font-size: 0.95rem; line-height: 1.5; }
+    .footer-contact-margin { margin-top: 1rem; }
+
+    h1, h2, h3 { margin-bottom: 1rem; font-weight: 600; }
+    h2 { color: #1b5e20; border-left: 8px solid #2e7d32; padding-left: 1rem; }
+
+    /* Buttons with depth */
+    button, .btn-like { 
+      background: linear-gradient(to bottom, #2e7d32, #1b5e20); 
+      color: white; 
+      border: none; 
+      padding: 0.8rem 2rem; 
+      border-radius: 60px; 
+      font-size: 1rem; 
+      font-weight: 600; 
+      cursor: pointer; 
+      transition: 0.2s; 
+      box-shadow: 0 8px 14px -6px #1b5e20; 
+      margin: 0.5rem 0.25rem; 
+      border: 1px solid #388e3c;
+    }
+    button:hover { 
+      background: #1b5e20; 
+      transform: translateY(-3px); 
+      box-shadow: 0 14px 20px -8px #0f3b0f; 
+    }
+    button.secondary { background: white; color: #1b5e20; border: 2px solid #1b5e20; box-shadow: none; }
+    button.secondary:hover { background: #e8f5e9; transform: translateY(-2px); }
+    button.danger { background: #d32f2f; border-color: #b71c1c; }
+
+    /* Inputs */
+    input, select, textarea { 
+      padding: 0.8rem 1.5rem; 
+      width: 100%; 
+      max-width: 400px; 
+      margin: 0.5rem 0; 
+      border: 2px solid #c8e6c9; 
+      border-radius: 60px; 
+      font-size: 1rem; 
+      transition: 0.2s; 
+      background: white;
+    }
+    input:focus, select:focus, textarea:focus { 
+      border-color: #2e7d32; 
+      box-shadow: 0 0 0 4px rgba(46,125,50,0.2); 
+      outline: none; 
+    }
+
+    /* Home announcement - more vibrant */
+    .announcement { 
+      background: #ffecb3; 
+      color: #1b5e20; 
+      padding: 2rem; 
+      margin: 2rem auto; 
+      border-radius: 32px; 
+      max-width: 650px; 
+      box-shadow: 0 20px 30px -5px #0f3b0f; 
+      border: 2px solid #ffb74d; 
+      text-align: left; 
+      position: relative;
+      overflow: hidden;
+    }
+    .announcement::before {
+      content: "📢";
+      font-size: 5rem;
+      position: absolute;
+      right: 10px;
+      bottom: -10px;
+      opacity: 0.15;
+      transform: rotate(10deg);
+    }
+    .announcement h3 { color: #bf360c; font-size: 2rem; margin-bottom: 1rem; }
+
+    /* Search results card */
+    .search-card { 
+      background: white; 
+      color: #1e2b1e; 
+      padding: 1.2rem; 
+      margin: 1rem auto; 
+      border-radius: 24px; 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
+      text-align: left; 
+      max-width: 500px; 
+      border-left: 8px solid #2e7d32; 
+      transition: 0.2s;
+    }
+    .search-card:hover { transform: scale(1.02); box-shadow: 0 12px 25px rgba(0,60,0,0.15); }
+
+    /* Footer - gabanya (reduced & split) */
+    footer { 
+      background: #0a2f0a; 
+      color: #e0e0e0; 
+      padding: 2rem 2rem 1rem; 
+      margin-top: 3rem; 
+      border-top: 4px solid #66bb6a;
+    }
+    .footer-main { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 2rem; 
+      justify-content: space-between; 
+      max-width: 1200px; 
+      margin: 0 auto;
+    }
+    .footer-div { 
+      flex: 1 1 220px; 
+      min-width: 200px;
+    }
+    .footer-h3, .footer-h4 { 
+      color: #a5d6a7; 
+      margin-bottom: 1rem; 
+      font-weight: 600;
+      border-bottom: 2px solid #66bb6a; 
+      display: inline-block; 
+      padding-bottom: 0.3rem;
+    }
+    .footer-ul, .footer-contact-ul { 
+      list-style: none; 
+      padding-left: 0; 
+      margin-top: 0.5rem;
+    }
+    .footer-ul li, .footer-contact-ul li { 
+      margin: 0.5rem 0; 
+    }
+    .footer-a { 
+      color: #ddd; 
+      text-decoration: none; 
+      transition: color 0.2s; 
+    }
+    .footer-a:hover { 
+      color: #a5d6a7; 
+      text-decoration: underline; 
+    }
+
+    /* Social icons - compact */
+    .social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1e3a1e;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: 500;
+      border: 1px solid #66bb6a;
+      font-size: 0.9rem;
+    }
+    .social a i { font-size: 1.1rem; }
+    .social a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    }
+    /* Brand hover colors */
+    .social a[href*="youtube"]:hover { background: #ff0000; border-color: #ff0000; }
+    .social a[href*="instagram"]:hover { background: #d62976; border-color: #d62976; }
+    .social a[href*="tiktok"]:hover { background: #010101; border-color: #25f4ee; }
+    .social a[href*="twitter"]:hover { background: #1DA1F2; border-color: #1DA1F2; }
+
+    .footer-bottom { 
+      width: 100%; 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.95rem; 
+      border-top: 1px solid #2e5e2e; 
+      padding-top: 1.2rem; 
+    }
+    .developer { 
+      font-weight: bold; 
+      color: #b9f6ca; 
+      animation: glowBounce 3s infinite; 
+      display: inline-block; 
+    }
+    @keyframes glowBounce {
+      0% { text-shadow: 0 0 3px #66bb6a; transform: translateY(0); }
+      25% { text-shadow: 0 0 12px #a5d6a7; transform: translateY(-4px); }
+      50% { text-shadow: 0 0 8px #66bb6a; transform: translateY(0); }
+      75% { text-shadow: 0 0 12px #a5d6a7; transform: translateY(-4px); }
+      100% { text-shadow: 0 0 3px #66bb6a; transform: translateY(0); }
+    }
+
+    /* Chat modal - sleek */
+    #chatModal { 
+      display: none; 
+      position: fixed; 
+      bottom: 20px; 
+      right: 20px; 
+      width: 340px; 
+      max-height: 460px; 
+      background: white; 
+      border-radius: 28px; 
+      box-shadow: 0 25px 45px rgba(0,40,0,0.5); 
+      overflow: hidden; 
+      flex-direction: column; 
+      z-index: 1000; 
+      border: 2px solid #2e7d32; 
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    #chatHeader { background: #1b5e20; color: white; padding: 1rem 1.2rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+    #chatMessages { padding: 1rem; height: 260px; overflow-y: auto; background: #f1f8e9; display: flex; flex-direction: column; gap: 8px; }
+    .chat-message { padding: 0.6rem 1rem; border-radius: 20px; background: #e0e0e0; max-width: 80%; word-wrap: break-word; align-self: flex-start; }
+    .chat-message.teacher { background: #c8e6c9; align-self: flex-end; }
+    #chatInput { display: flex; padding: 0.8rem; gap: 5px; background: #f9f9f9; }
+
+    /* Services grid */
+    .services-grid { display: flex; flex-wrap: wrap; gap: 1.8rem; justify-content: center; margin-top: 2rem; }
+    .service-card { 
+      background: #f1f8e9; 
+      border-radius: 28px; 
+      padding: 1.8rem 1.2rem; 
+      flex: 1 1 180px; 
+      max-width: 220px; 
+      box-shadow: 0 10px 25px rgba(0,40,0,0.1); 
+      border: 1px solid #a5d6a7; 
+      transition: 0.2s;
+      text-align: center;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,70,0,0.2); }
+    .service-card i { font-size: 2.8rem; color: #1b5e20; margin-bottom: 0.8rem; }
+
+    /* MTC services list */
+    .mtc-services-list { 
+      text-align: left; 
+      margin: 2rem 0; 
+      background: #e8f5e9; 
+      padding: 2rem; 
+      border-radius: 32px; 
+      border-left: 10px solid #2e7d32; 
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    /* Map iframe */
+    .map-iframe { border-radius: 28px; width: 100%; height: 300px; border: 3px solid #a5d6a7; }
+
+    /* Responsive */
+    @media (max-width: 600px) { 
+      nav a { font-size: 0.9rem; padding: 0.4rem 0.8rem; } 
+      header h2 { font-size: 1.5rem; }
+      .footer-main { flex-direction: column; gap: 1.5rem; }
+    }
+
+    /* Existing utility classes (unchanged) */
+    .input-container { position: relative; display: inline-block; width: 100%; max-width: 350px; }
+    .show-pass-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #555; background: white; border-radius: 50%; padding: 2px; }
+    #searchResults { max-height: 400px; overflow-y: auto; }
+    .question-block { background: #f1f8e9; padding: 1.5rem; border-radius: 24px; margin: 1.5rem 0; }
+    .option-row { margin: 0.7rem 0; display: flex; align-items: center; gap: 0.8rem; }
+    #examScore { font-size: 1.4rem; font-weight: bold; color: #1b5e20; margin-top: 1rem; }
+    .report-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .report-table th, .report-table td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    .report-table th { background: #2e7d32; color: white; }
+    .user-item { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0; }
+    #examHistory { max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 0.5rem; border-radius: 12px; background: #f9f9f9; }
+    .all-reports { display: none; margin-top: 20px; }
+    .question-area { display: none; }
+    .options-flex { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+    .finish-btn { background: #ff9800; }
+    .exam-textarea { width: 100%; border-radius: 20px; }
+    .file-list { list-style: none; padding-left: 0; }
+    .close-chat { cursor: pointer; font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+<header>
+  <h2><i class="fas fa-graduation-cap"></i> E-Learning Pro</h2>
+  <nav>
+    <a onclick="show('home')">Home</a>
+    <a onclick="show('about')">About</a>
+    <a onclick="show('mission')">Mission</a>
+    <a onclick="show('services')">Services</a>
+    <a onclick="show('login')">Login</a>
+    <a onclick="show('register')">Sign Up</a>
+    <a onclick="show('contact')">Contact</a>
+    <a onclick="show('exam')">Exam</a>
+    <a onclick="show('createExam')">Create Exam</a>
+    <a onclick="show('fileTeacher')">File (Teacher)</a>
+    <a onclick="show('fileStudent')">File (Student)</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home">
+  <h1>Welcome to E-Learning Platform</h1>
+  <p class="home-description">Online learning & school report management for Rwanda</p>
+
+  <input type="text" id="searchInput" placeholder=" Search schools by name, level, province..." oninput="homeSearch()" class="search-input"><br>
+  <div id="searchResults"></div>
+  <button onclick="copyResults()"><i class="fas fa-copy"></i> Copy Results</button><br>
+  <button onclick="show('register')" class="start-learning-btn"> Start Learning</button>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="dashboard contact-dashboard">
+    <h2> About Us – Muhanga Technical Center (MTC)</h2>
+    <p>Muhanga Technical Center (MTC) ni ishuri ry’imyuga n’ubumenyingiro (TVET) riherereye mu Karere ka Muhanga, rigamije guteza imbere ubumenyi bufatika n’ubushobozi bwifashishwa ku isoko ry’umurimo.</p>
+    <p>Dutanga amahugurwa mu mashami atandukanye arimo SOD, NIT, AUT, BDC, na FBO, twigisha mu buryo bujyanye n’ikoranabuhanga n’iterambere rigezweho.</p>
+    <p>Intego ya MTC ni gutoza abahanga, gufasha urubyiruko kwihangira imirimo, no guteza imbere iterambere rirambye ry’igihugu binyuze mu burezi bufite ireme.</p>
+    <p>MTC yiyemeje gutanga uburezi bufite ireme, bushingiye ku masomo afatika, indangagaciro nziza, n’ubufatanye n’abandi bafatanyabikorwa.</p>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="dashboard">
+    <h2>Our Mission</h2>
+    <p>Empowering students, teachers, and schools in Rwanda with an easy-to-use digital learning platform, ensuring quality education and transparent reporting.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="dashboard dashboard-wide">
+    <h2>🛠️ Services Dutanga – MTC</h2>
+    <div class="mtc-services-list">
+      <p>Muhanga Technical Center (MTC) itanga serivisi zitandukanye zigamije guteza imbere ubumenyi n’ubushobozi bw’abanyeshuri n’abaturage muri rusange, zirimo:</p>
+      <ul>
+        <li><i class="fas fa-wrench"></i> Amahugurwa y’imyuga n’ubumenyingiro (TVET) mu mashami atandukanye (SOD, NIT, AUT, BDC, FBO)</li>
+        <li><i class="fas fa-microscope"></i> Amasomo afatika (practical training) afasha abanyeshuri kubona ubumenyi bukoreshwa ku kazi</li>
+        <li><i class="fas fa-laptop"></i> Kwigisha ikoranabuhanga n’imikoreshereze ya mudasobwa</li>
+        <li><i class="fas fa-briefcase"></i> Gufasha abanyeshuri kwihangira imirimo n’ubujyanama mu bucuruzi</li>
+        <li><i class="fas fa-clock"></i> Amahugurwa magufi (short courses) ku rubyiruko n’abakuze</li>
+        <li><i class="fas fa-handshake"></i> Guhuza abanyeshuri n’amasoko y’umurimo (internship & job orientation)</li>
+        <li><i class="fas fa-users"></i> Kugira inama no gutoza imyuga ku baturage (community outreach)</li>
+      </ul>
+    </div>
+
+    <h3 class="services-title">Our Platform Services</h3>
+    <p class="services-desc">We also offer a range of digital solutions tailored for Rwandan schools and learners.</p>
+    <div class="services-grid">
+      <div class="service-card"><i class="fas fa-book-open"></i><h3>Online Courses</h3><p>Interactive courses in Math, Science, Languages.</p></div>
+      <div class="service-card"><i class="fas fa-chalkboard-teacher"></i><h3>Virtual Classrooms</h3><p>Live video, whiteboard, real-time interaction.</p></div>
+      <div class="service-card"><i class="fas fa-chart-line"></i><h3>Progress Tracking</h3><p>Grades, attendance, performance analytics.</p></div>
+      <div class="service-card"><i class="fas fa-file-alt"></i><h3>Report Generation</h3><p>Automated term reports and transcripts.</p></div>
+      <div class="service-card"><i class="fas fa-tasks"></i><h3>Assignment Manager</h3><p>Submit, grade, give feedback digitally.</p></div>
+      <div class="service-card"><i class="fas fa-comments"></i><h3>Live Chat & Support</h3><p>Messaging for students, teachers, admin.</p></div>
+      <div class="service-card"><i class="fas fa-school"></i><h3>School Management</h3><p>Enrollments, scheduling, staff management.</p></div>
+      <div class="service-card"><i class="fas fa-users"></i><h3>Parent Portal</h3><p>Track progress, attendance, school updates.</p></div>
+      <div class="service-card"><i class="fas fa-calendar-alt"></i><h3>Timetable Manager</h3><p>Class timetables, exam schedules, events.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="register">
+  <div class="dashboard">
+    <h2>Register</h2>
+    <input id="regUser" placeholder="Username"><br>
+    <div class="input-container">
+      <input id="regPass" type="password" placeholder="Password">
+      <span class="show-pass-btn" onclick="togglePass('regPass')">👁️</span>
+    </div><br>
+    <select id="regRole">
+      <option value="">Select Role</option>
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+      <option value="admin">Admin</option>
+    </select><br>
+    <button onclick="register()">Register</button>
+  </div>
+</section>
+
+<!-- LOGIN -->
+<section id="login">
+  <div class="dashboard">
+    <h2>Login</h2>
+    <input id="logUser" placeholder="Username"><br>
+    <div class="input-container">
+      <input id="logPass" type="password" placeholder="Password">
+      <span class="show-pass-btn" onclick="togglePass('logPass')">👁️</span>
+    </div><br>
+    <select id="logRole">
+      <option value="">Select Role</option>
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+      <option value="admin">Admin</option>
+    </select><br>
+    <button onclick="login()">Login</button>
+  </div>
+</section>
+
+<!-- STUDENT DASHBOARD -->
+<section id="student">
+  <div class="dashboard">
+    <h2> Student Dashboard</h2>
+    <h3>Your Report</h3>
+    <p id="studentReport">No report available yet.</p>
+    <h3> Your Exam History</h3>
+    <div id="examHistory"></div>
+    <button onclick="showChat()"><i class="fas fa-comments"></i> Live Chat</button>
+    <button class="secondary" onclick="logout()">Logout</button>
+  </div>
+</section>
+
+<!-- TEACHER DASHBOARD -->
+<section id="teacher">
+  <div class="dashboard">
+    <h2> Teacher Dashboard</h2>
+    <h3>Add Student Marks</h3>
+    <input id="studentName" placeholder="Student Username"><br>
+    <input id="studentMark" placeholder="Marks (0-100)" type="number"><br>
+    <button onclick="addReport()">Save Report</button>
+    <button onclick="showChart()">View Reports Chart</button>
+    <button onclick="showAllReports()">View All Reports</button>
+    <button onclick="showChat()">Live Chat</button>
+    <button class="secondary" onclick="logout()">Logout</button>
+    
+    <div id="chartContainer">
+      <canvas id="reportChart"></canvas>
+    </div>
+    
+    <div id="allReportsContainer" class="all-reports">
+      <h3>All Student Reports</h3>
+      <table class="report-table" id="allReportsTable">
+        <thead><tr><th>Student</th><th>Marks</th><th>Teacher</th><th>Action</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
+<section id="admin">
+  <div class="dashboard">
+    <h2>Admin Dashboard</h2>
+    <h3>Registered Users</h3>
+    <button onclick="viewUsers()">Show Users</button>
+    <div id="usersList"></div>
+    <button class="secondary" onclick="logout()">Logout</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="dashboard contact-dashboard">
+    <h2>Contact Us</h2>
+    <p><i class="fas fa-envelope"></i> info@elearningpro.rw</p>
+    <p><i class="fas fa-phone-alt"></i> +250 790717768</p>
+    <p><i class="fas fa-map-pin"></i> MTC IS, P.O. Box 2007, Muhanga, Rwanda</p>
+    <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.263137470265!2d29.7641301759782!3d-2.105150898144518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca0dc7a4c3fbb%3A0x8ed1d1a6b9b5765a!2sMuhanga%20Technical%20College%20(MTC)!5e0!3m2!1sen!2srw!4v1709665367890!5m2!1sen!2srw" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- EXAM STUDENT -->
+<section id="exam">
+  <div class="dashboard">
+    <h2> Online Exam</h2>
+    <div id="examContent">
+      <p>Select exam:</p>
+      <select id="examSelect"></select>
+      <button onclick="startExam()">Start Exam</button>
+      <div id="questionArea" class="question-block question-area">
+        <h3 id="questionText"></h3>
+        <div id="options"></div>
+        <div class="options-flex">
+          <button id="nextBtn">Next</button>
+          <button id="finishBtn" class="finish-btn">Finish</button>
+        </div>
+        <p id="examScore"></p>
+      </div>
+    </div>
+    <button class="secondary" onclick="logout()">Logout</button>
+  </div>
+</section>
+
+<!-- CREATE EXAM TEACHER -->
+<section id="createExam">
+  <div class="dashboard">
+    <h2> Create Exam (Teacher)</h2>
+    <input id="examTitle" placeholder="Exam Title (e.g. Mathematics Mid-term)"><br>
+    <textarea id="examQuestions" placeholder="Format: Question|Option1,Option2,Option3,Option4|CorrectIndex(0-3). One per line." rows="6" class="exam-textarea"></textarea><br>
+    <button onclick="saveExam()">Save Exam</button>
+    <button class="secondary" onclick="logout()">Logout</button>
+    <p class="example-text"><i class="fas fa-info-circle"></i> Example: What is 2+2?|2,3,4,5|2</p>
+  </div>
+</section>
+
+<!-- FILE MANAGEMENT TEACHER -->
+<section id="fileTeacher">
+  <div class="dashboard">
+    <h2> Teacher File Manager</h2>
+    <input type="file" id="uploadFile"><br>
+    <button onclick="uploadFile()">Upload File</button>
+    <h3>Your Uploaded Files</h3>
+    <ul id="fileListTeacher" class="file-list"></ul>
+    <button class="secondary" onclick="logout()">Logout</button>
+  </div>
+</section>
+
+<!-- FILE MANAGEMENT STUDENT -->
+<section id="fileStudent">
+  <div class="dashboard">
+    <h2> Student File Access</h2>
+    <h3>Available Files from Teachers</h3>
+    <ul id="fileListStudent" class="file-list"></ul>
+    <button class="secondary" onclick="logout()">Logout</button>
+  </div>
+</section>
+
+<!-- CHAT MODAL -->
+<div id="chatModal">
+  <div id="chatHeader">
+    <span><i class="fas fa-comment-dots"></i> Live Chat (Role: <span id="chatRoleLabel">guest</span>)</span>
+    <span class="close-chat" onclick="closeChat()">&times;</span>
+  </div>
+  <div id="chatMessages"></div>
+  <div id="chatInput">
+    <input id="chatMsg" placeholder="Type a message...">
+    <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<!-- FOOTER - GABANYA (Redesigned, more compact) -->
+<footer>
+  <div class="footer-main">
+    <!-- About Section -->
+    <div class="footer-div">
+      <h3 class="footer-h3">E-Learning Pro</h3>
+      <p class="footer-about-text">Online learning & school report management for Rwanda. Empowering students and teachers.</p>
+    </div>
+
+    <!-- Resources (combined Quick Links + Platform) -->
+    <div class="footer-div">
+      <h4 class="footer-h4">Resources</h4>
+      <ul class="footer-ul">
+        <li><a href="#" class="footer-a" onclick="show('about')">About Us</a></li>
+        <li><a href="#" class="footer-a" onclick="show('contact')">Privacy Policy</a></li>
+        <li><a href="#" class="footer-a" onclick="show('home')">Terms & Conditions</a></li>
+        <li><a href="#" class="footer-a" onclick="show('exam')">Exam Portal</a></li>
+        <li><a href="#" class="footer-a" onclick="show('createExam')">Create Exam</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect (Social + Contact) -->
+    <div class="footer-div">
+      <h4 class="footer-h4">Connect</h4>
+      <div class="social">
+        <a href="https://youtube.com" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener"><i class="fab fa-twitter"></i> Twitter</a>
+      </div>
+      <ul class="footer-contact-ul footer-contact-margin">
+        <li><i class="fas fa-phone-alt"></i> +250 790717768</li>
+        <li><i class="fas fa-envelope"></i> shemasamuel@elearningpro.rw</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 E-Learning Pro. All rights reserved.
+    <span class="developer">E-Learning Pro Team</span> | Designed by shema software development
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+'use strict';
+
+// ---------- GLOBALS ----------
+let currentUser = null;
+let chartInstance = null;
+let currentExam = { questions: [], index: 0, score: 0 };
+
+const rwandaSchools = [
+  { name: "University of Rwanda", level: "University", province: "Kigali City" },
+  { name: "Adventist University of Central Africa", level: "University", province: "Kigali City" },
+  { name: "Université Libre de Kigali (ULK)", level: "University", province: "Kigali City" },
+  { name: "University of Global Health Equity (UGHE)", level: "University", province: "Eastern Province" },
+  { name: "Green Hills Academy", level: "Secondary", province: "Kigali City" },
+  { name: "International School of Kigali", level: "Secondary", province: "Kigali City" },
+  { name: "Lycée de Kigali", level: "Secondary", province: "Kigali City" },
+  { name: "Maryhill Girls Secondary School", level: "Secondary", province: "Eastern Province" },
+  { name: "MBUGA Primary School", level: "Primary", province: "Northern Province" },
+  { name: "Nyabiheke Primary School", level: "Primary", province: "Eastern Province" },
+  { name: "Katarara Primary School", level: "Primary", province: "Eastern Province" },
+  { name: "International Technical School of Kigali", level: "TVET", province: "Kigali City" },
+  { name: "Muhabura Integrated Polytechnic College", level: "TVET", province: "Northern Province" }
+];
+
+// ---------- UTILITIES ----------
+function togglePass(id) {
+  const input = document.getElementById(id);
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+function show(id) {
+  if (!currentUser && (id === 'student' || id === 'teacher' || id === 'admin' || id === 'fileTeacher' || id === 'fileStudent' || id === 'createExam' || id === 'exam')) {
+    alert("Please login first");
+    id = 'login';
+  }
+  if (currentUser) {
+    if ((id === 'createExam' || id === 'fileTeacher') && currentUser.role !== 'teacher') {
+      alert("Access denied: Teachers only");
+      return;
+    }
+    if (id === 'fileStudent' && currentUser.role !== 'student') {
+      alert("Access denied: Students only");
+      return;
+    }
+    if (id === 'exam' && currentUser.role !== 'student') {
+      alert("Exams are for students");
+      return;
+    }
+    if (id === 'admin' && currentUser.role !== 'admin') {
+      alert("Admins only");
+      return;
+    }
+  }
+
+  document.querySelectorAll("section").forEach(s => s.style.display = "none");
+  document.getElementById(id).style.display = "block";
+  closeChat();
+  closeChart();
+  document.getElementById('allReportsContainer').style.display = 'none';
+
+  if (id === "exam") loadExams();
+  if (id === "fileTeacher") loadTeacherFiles();
+  if (id === "fileStudent") loadStudentFiles();
+  if (id === "student") { loadStudentReport(); loadExamHistory(); }
+}
+
+function logout() {
+  currentUser = null;
+  alert("Logged out successfully");
+  show("home");
+}
+
+// ---------- REGISTRATION & LOGIN ----------
+function register() {
+  const user = document.getElementById("regUser").value.trim();
+  const pass = document.getElementById("regPass").value.trim();
+  const role = document.getElementById("regRole").value;
+  if (!user || !pass || !role) return alert("Fill all fields");
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  if (users.some(u => u.username === user)) return alert("Username exists");
+  users.push({ username: user, password: pass, role: role });
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Registration successful! Please login.");
+  show("login");
+}
+
+function login() {
+  const user = document.getElementById("logUser").value.trim();
+  const pass = document.getElementById("logPass").value.trim();
+  const role = document.getElementById("logRole").value;
+  if (!user || !pass || !role) return alert("Fill all fields");
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const found = users.find(u => u.username === user && u.password === pass && u.role === role);
+  if (found) {
+    currentUser = found;
+    alert(`Welcome ${user} (${role})`);
+    show(role);
+  } else {
+    alert("Invalid credentials");
+  }
+}
+
+// ---------- HOME SEARCH ----------
+function homeSearch() {
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  const results = rwandaSchools.filter(s => s.name.toLowerCase().includes(query) || s.level.toLowerCase().includes(query) || s.province.toLowerCase().includes(query));
+  const resultsDiv = document.getElementById("searchResults");
+  if (!results.length) { resultsDiv.innerHTML = "<p>No schools found</p>"; return; }
+  resultsDiv.innerHTML = results.map(s => `<div class="search-card"><h3>${s.name}</h3><p>Level: ${s.level} | Province: ${s.province}</p></div>`).join("");
+}
+
+function copyResults() {
+  const cards = document.querySelectorAll("#searchResults .search-card");
+  if (!cards.length) return alert("No results to copy");
+  const text = Array.from(cards).map(c => c.innerText).join("\n\n");
+  navigator.clipboard.writeText(text).then(() => alert("Copied!")).catch(() => alert("Copy failed"));
+}
+
+// ---------- REPORTS ----------
+function addReport() {
+  const student = document.getElementById("studentName").value.trim();
+  const mark = document.getElementById("studentMark").value.trim();
+  if (!student || !mark || isNaN(mark) || mark < 0 || mark > 100) return alert("Valid marks (0-100) required");
+  const reports = JSON.parse(localStorage.getItem("reports")) || [];
+  reports.push({ student, mark: Number(mark), teacher: currentUser.username });
+  localStorage.setItem("reports", JSON.stringify(reports));
+  alert("Report saved");
+  document.getElementById("studentName").value = "";
+  document.getElementById("studentMark").value = "";
+}
+
+function loadStudentReport() {
+  if (!currentUser) return;
+  const reports = JSON.parse(localStorage.getItem("reports")) || [];
+  const myReports = reports.filter(r => r.student === currentUser.username);
+  if (!myReports.length) document.getElementById("studentReport").innerText = "No report available";
+  else {
+    const avg = myReports.reduce((acc, r) => acc + r.mark, 0) / myReports.length;
+    document.getElementById("studentReport").innerHTML = `You have ${myReports.length} grade(s). Latest: ${myReports[myReports.length-1].mark} (avg: ${avg.toFixed(1)})`;
+  }
+}
+
+function showChart() {
+  const reports = JSON.parse(localStorage.getItem("reports")) || [];
+  if (!reports.length) return alert("No reports to show");
+  const ctx = document.getElementById("reportChart").getContext("2d");
+  if (chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: reports.map(r => r.student),
+      datasets: [{
+        label: "Marks",
+        data: reports.map(r => r.mark),
+        backgroundColor: "#4caf50"
+      }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 100 } } }
+  });
+  document.getElementById("chartContainer").style.display = "block";
+}
+function closeChart() { document.getElementById("chartContainer").style.display = "none"; }
+
+function showAllReports() {
+  const reports = JSON.parse(localStorage.getItem("reports")) || [];
+  const tbody = document.querySelector("#allReportsTable tbody");
+  tbody.innerHTML = reports.map((r, index) => `
+    <tr>
+      <td>${r.student}</td>
+      <td>${r.mark}</td>
+      <td>${r.teacher}</td>
+      <td><button class="danger" onclick="deleteReport(${index})">Delete</button></td>
+    </tr>
+  `).join("");
+  document.getElementById("allReportsContainer").style.display = "block";
+}
+
+function deleteReport(index) {
+  let reports = JSON.parse(localStorage.getItem("reports")) || [];
+  reports.splice(index, 1);
+  localStorage.setItem("reports", JSON.stringify(reports));
+  showAllReports();
+  if (currentUser?.role === 'student') loadStudentReport();
+}
+
+// ---------- ADMIN ----------
+function viewUsers() {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const list = document.getElementById("usersList");
+  list.innerHTML = users.length ? users.map((u, idx) => `
+    <div class="user-item">
+      <span>👤 ${u.username} (${u.role})</span>
+      <button class="danger" onclick="deleteUser(${idx})">Delete</button>
+    </div>
+  `).join("") : "No users";
+}
+
+function deleteUser(index) {
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  if (users[index].username === currentUser?.username) {
+    alert("You cannot delete yourself while logged in.");
+    return;
+  }
+  users.splice(index, 1);
+  localStorage.setItem("users", JSON.stringify(users));
+  viewUsers();
+}
+
+// ---------- CHAT ----------
+function showChat() {
+  if (!currentUser) return alert("Login to chat");
+  document.getElementById("chatModal").style.display = "flex";
+  document.getElementById("chatRoleLabel").innerText = currentUser.role;
+  loadChatMessages();
+}
+function closeChat() { document.getElementById("chatModal").style.display = "none"; }
+
+function sendMessage() {
+  const msgInput = document.getElementById("chatMsg");
+  const msg = msgInput.value.trim();
+  if (!msg || !currentUser) return;
+  const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+  messages.push({ user: currentUser.username, role: currentUser.role, text: msg, time: Date.now() });
+  localStorage.setItem("chatMessages", JSON.stringify(messages));
+  msgInput.value = "";
+  loadChatMessages();
+}
+
+function loadChatMessages() {
+  const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+  const container = document.getElementById("chatMessages");
+  container.innerHTML = messages.slice(-20).map(m => 
+    `<div class="chat-message ${m.role === 'teacher' ? 'teacher' : ''}"><strong>${m.user} (${m.role}):</strong> ${m.text}</div>`
+  ).join("");
+  container.scrollTop = container.scrollHeight;
+}
+
+// ---------- EXAMS ----------
+function loadExams() {
+  const exams = JSON.parse(localStorage.getItem("exams")) || [];
+  const select = document.getElementById("examSelect");
+  select.innerHTML = exams.length ? exams.map((e, i) => `<option value="${i}">${e.title}</option>`).join("") : '<option>No exams</option>';
+}
+
+function startExam() {
+  const exams = JSON.parse(localStorage.getItem("exams")) || [];
+  const idx = document.getElementById("examSelect").value;
+  if (!exams.length || idx === 'No exams') return alert("No exam available");
+  const exam = exams[idx];
+  currentExam = { title: exam.title, questions: exam.questions, index: 0, score: 0 };
+  document.getElementById("questionArea").style.display = "block";
+  document.getElementById("examScore").innerText = "";
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = currentExam.questions[currentExam.index];
+  document.getElementById("questionText").innerText = q.question;
+  const optsDiv = document.getElementById("options");
+  optsDiv.innerHTML = q.options.map((opt, i) => `
+    <div class="option-row">
+      <input type="radio" name="examOpt" value="${i}" id="opt${i}">
+      <label for="opt${i}">${opt}</label>
+    </div>
+  `).join("");
+}
+
+function nextQuestion() {
+  const selected = document.querySelector('input[name="examOpt"]:checked');
+  if (!selected) return alert("Select an answer");
+  if (parseInt(selected.value) === currentExam.questions[currentExam.index].correct) currentExam.score++;
+  currentExam.index++;
+  if (currentExam.index < currentExam.questions.length) showQuestion();
+  else finishExam();
+}
+
+function finishExam() {
+  const selected = document.querySelector('input[name="examOpt"]:checked');
+  if (selected && currentExam.index < currentExam.questions.length) {
+    if (parseInt(selected.value) === currentExam.questions[currentExam.index].correct) currentExam.score++;
+  }
+  const scoreText = `Your score: ${currentExam.score} / ${currentExam.questions.length}`;
+  document.getElementById("examScore").innerText = scoreText;
+  document.getElementById("questionArea").style.display = "none";
+
+  if (currentUser) {
+    const history = JSON.parse(localStorage.getItem("examHistory")) || [];
+    history.push({
+      student: currentUser.username,
+      examTitle: currentExam.title,
+      score: currentExam.score,
+      total: currentExam.questions.length,
+      date: new Date().toLocaleString()
+    });
+    localStorage.setItem("examHistory", JSON.stringify(history));
+  }
+}
+
+function loadExamHistory() {
+  if (!currentUser) return;
+  const history = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const myHistory = history.filter(h => h.student === currentUser.username);
+  const container = document.getElementById("examHistory");
+  if (!myHistory.length) {
+    container.innerHTML = "<p>No exams taken yet.</p>";
+  } else {
+    container.innerHTML = myHistory.map(h => 
+      `<div class="exam-history-item">📘 ${h.examTitle}: ${h.score}/${h.total} (${h.date})</div>`
+    ).join("");
+  }
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'nextBtn') nextQuestion();
+  if (e.target.id === 'finishBtn') finishExam();
+});
+
+function saveExam() {
+  if (!currentUser || currentUser.role !== 'teacher') return alert("Only teachers can create exams");
+  const title = document.getElementById("examTitle").value.trim();
+  const lines = document.getElementById("examQuestions").value.trim().split("\n");
+  if (!title || lines.length === 0) return alert("Fill title and questions");
+  const questions = lines.map(line => {
+    const parts = line.split("|");
+    if (parts.length !== 3) return null;
+    return {
+      question: parts[0].trim(),
+      options: parts[1].split(",").map(s => s.trim()),
+      correct: parseInt(parts[2].trim())
+    };
+  }).filter(q => q && q.options.length === 4 && q.correct >= 0 && q.correct < 4);
+  if (!questions.length) return alert("Invalid format. Use: Question|opt1,opt2,opt3,opt4|correctIndex");
+  const exams = JSON.parse(localStorage.getItem("exams")) || [];
+  exams.push({ title, questions });
+  localStorage.setItem("exams", JSON.stringify(exams));
+  alert("Exam saved");
+  document.getElementById("examTitle").value = "";
+  document.getElementById("examQuestions").value = "";
+}
+
+// ---------- FILE MANAGEMENT ----------
+function uploadFile() {
+  if (!currentUser || currentUser.role !== 'teacher') return alert("Teachers only");
+  const fileInput = document.getElementById("uploadFile");
+  const file = fileInput.files[0];
+  if (!file) return alert("Select a file");
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const files = JSON.parse(localStorage.getItem("files")) || [];
+    files.push({ name: file.name, content: e.target.result, uploadedBy: currentUser.username, time: Date.now() });
+    localStorage.setItem("files", JSON.stringify(files));
+    alert("Uploaded");
+    fileInput.value = "";
+    loadTeacherFiles();
+  };
+  reader.readAsDataURL(file);
+}
+
+function loadTeacherFiles() {
+  if (!currentUser) return;
+  const files = JSON.parse(localStorage.getItem("files")) || [];
+  const myFiles = files.filter(f => f.uploadedBy === currentUser.username);
+  const list = document.getElementById("fileListTeacher");
+  list.innerHTML = myFiles.length ? myFiles.map(f => `<li style="margin:10px 0">📄 ${f.name} <button onclick="deleteFile('${f.name}')">🗑️</button></li>`).join("") : "<p>No files uploaded</p>";
+}
+
+function loadStudentFiles() {
+  const files = JSON.parse(localStorage.getItem("files")) || [];
+  const list = document.getElementById("fileListStudent");
+  list.innerHTML = files.length ? files.map(f => `<li style="margin:10px 0">📎 <a href="${f.content}" download="${f.name}">${f.name}</a> (by ${f.uploadedBy})</li>`).join("") : "<p>No files shared</p>";
+}
+
+function deleteFile(fileName) {
+  let files = JSON.parse(localStorage.getItem("files")) || [];
+  files = files.filter(f => !(f.name === fileName && f.uploadedBy === currentUser.username));
+  localStorage.setItem("files", JSON.stringify(files));
+  loadTeacherFiles();
+}
+
+// ---------- INIT ----------
+window.onload = () => {
+  show('home');
+};
+</script>
+</body>
+</html>
